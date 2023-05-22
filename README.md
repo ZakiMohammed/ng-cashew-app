@@ -1,27 +1,52 @@
-# NgCachewApp
+# 🥜 NgCashew
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
+Check out the CodeOmelet blog post for this project.
 
-## Development server
+Link: https://codeomelet.com/posts/cache-angular-http-request-using-ngneat-cashew
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+___
 
-## Code scaffolding
+NgCashew app to explore the air light `@ngneat/cashew` package to cache Angular HTTP requests powered by Cirrus UI.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Run Project
 
-## Build
+```
+npm start
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Add Cashew Package
 
-## Running unit tests
+```
+npm i @ngneat/cashew
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Add to App Modules
 
-## Running end-to-end tests
+```
+@NgModule({
+  imports: [
+    HttpClientModule, 
+    HttpCacheInterceptorModule.forRoot(), 
+    ...
+  ],
+})
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Add to HTTP Service
 
-## Further help
+Configure the options object:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+private options = {
+  context: withCache()
+};
+```
+
+Pass it to `get` method:
+
+```
+getUsers() {
+  const url = `${this.url}${this.userUrl}`;
+  return this.http.get<any>(url, this.options);
+}
+```

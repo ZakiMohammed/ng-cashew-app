@@ -12,10 +12,7 @@ export class CoreService {
   private userUrl: string = 'users';
 
   private options = {
-    context: withCache({
-      version: 'v1',
-      ttl: 3000
-    })
+    context: withCache()
   };
 
   constructor(private http: HttpClient) {}

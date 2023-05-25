@@ -12,7 +12,10 @@ export class CoreService {
   private userUrl: string = 'users';
 
   private options = {
-    context: withCache()
+    context: withCache({
+      version: 'v1',
+      key: 'omelet'
+    })
   };
 
   constructor(private http: HttpClient) {}
